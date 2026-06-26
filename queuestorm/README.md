@@ -78,19 +78,6 @@ Once the servers are running:
 2. The backend API will be running at `http://localhost:3000`.
 3. You can interact with the user interface to perform support ops investigations. The frontend will communicate with the backend API, which in turn will utilize the configured AI models (Gemini, OpenAI, or Anthropic) based on your provided API keys to process the requests.
 
-## Deployment (Render)
-
-You can deploy the unified frontend and backend to [Render](https://render.com) for free with a single click using the button below:
-
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Zawadur-Rafid/BitByBit)
-
-### Setup Steps:
-1. Click the **Deploy to Render** button above.
-2. Sign in with your GitHub account (completely free).
-3. Render will automatically detect the configuration from `render.yaml`.
-4. Enter your LLM API Keys (like `GEMINI_API_KEY`, `OPENAI_API_KEY`, or `ANTHROPIC_API_KEY`) under **Environment Variables**.
-5. Click **Apply** to start the deployment.
-6. Once deployed, Render will provide you with the live URL of your application!
 
 ## Tech Stack
 - **Frontend:** React 18, Vite
