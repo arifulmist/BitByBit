@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "3000:3000"
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - PORT=3000
+    restart: unless-stopped
