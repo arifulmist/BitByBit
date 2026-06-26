@@ -575,22 +575,22 @@ export default function Home() {
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
         :root {
-          --bg-main: #0b0c15;
-          --bg-surface: #141526;
-          --bg-card: #1c1e36;
-          --border-color: rgba(255, 255, 255, 0.08);
-          --border-active: #6366f1;
+          --bg-main: #FFF5F8;
+          --bg-surface: #FFFFFF;
+          --bg-card: #FFFFFF;
+          --border-color: #E5E5E5;
+          --border-active: #E2136E;
           
-          --text-primary: #f8fafc;
-          --text-secondary: #94a3b8;
-          --text-muted: #64748b;
+          --text-primary: #333333;
+          --text-secondary: #666666;
+          --text-muted: #888888;
           
-          --color-indigo: #6366f1;
-          --color-purple: #8b5cf6;
-          --color-emerald: #10b981;
-          --color-amber: #f59e0b;
-          --color-rose: #ef4444;
-          --color-cyan: #06b6d4;
+          --color-indigo: #E2136E;
+          --color-purple: #C50F5E;
+          --color-emerald: #28A745;
+          --color-amber: #FFC107;
+          --color-rose: #DC3545;
+          --color-cyan: #FCE4EE;
         }
 
         * {
@@ -610,8 +610,8 @@ export default function Home() {
         .app-container {
           min-height: 100vh;
           padding: 2.5rem 1.5rem;
-          background: radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 40%),
-                      radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.05) 0%, transparent 45%);
+          background: radial-gradient(circle at 10% 20%, rgba(226, 19, 110, 0.05) 0%, transparent 40%),
+                      radial-gradient(circle at 90% 80%, rgba(197, 15, 94, 0.04) 0%, transparent 45%);
         }
 
         header {
@@ -628,7 +628,7 @@ export default function Home() {
           font-size: 2.2rem;
           font-weight: 800;
           letter-spacing: -0.5px;
-          background: linear-gradient(135deg, #a5b4fc 0%, #c084fc 100%);
+          background: linear-gradient(135deg, #E2136E 0%, #C50F5E 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
         }
@@ -643,12 +643,13 @@ export default function Home() {
           display: flex;
           align-items: center;
           gap: 0.6rem;
-          background: rgba(255, 255, 255, 0.03);
+          background: var(--bg-surface);
           border: 1px solid var(--border-color);
           padding: 0.5rem 1rem;
           border-radius: 9999px;
           font-size: 0.85rem;
           font-weight: 500;
+          color: var(--text-secondary);
         }
 
         .pulse-dot {
@@ -696,7 +697,7 @@ export default function Home() {
           border: 1px solid var(--border-color);
           border-radius: 20px;
           padding: 2rem;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 4px 20px rgba(226, 19, 110, 0.04);
         }
 
         .card-title {
@@ -711,11 +712,11 @@ export default function Home() {
 
         .tabs {
           display: flex;
-          background: rgba(0, 0, 0, 0.25);
+          background: var(--bg-main);
           padding: 0.3rem;
           border-radius: 12px;
           margin-bottom: 1.5rem;
-          border: 1px solid rgba(255, 255, 255, 0.03);
+          border: 1px solid var(--border-color);
         }
 
         .tab-btn {
@@ -733,10 +734,10 @@ export default function Home() {
         }
 
         .tab-btn.active {
-          background: var(--bg-card);
-          color: var(--text-primary);
-          box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-          border: 1px solid rgba(255, 255, 255, 0.05);
+          background: var(--bg-surface);
+          color: var(--border-active);
+          box-shadow: 0 2px 8px rgba(226, 19, 110, 0.06);
+          border: 1px solid rgba(226, 19, 110, 0.1);
         }
 
         .form-grid {
@@ -776,7 +777,7 @@ export default function Home() {
         }
 
         input[type="text"], select, textarea {
-          background: rgba(0, 0, 0, 0.2);
+          background: var(--bg-surface);
           border: 1px solid var(--border-color);
           border-radius: 10px;
           color: var(--text-primary);
@@ -790,8 +791,8 @@ export default function Home() {
         input[type="text"]:focus, select:focus, textarea:focus {
           outline: none;
           border-color: var(--border-active);
-          box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
-          background: rgba(0, 0, 0, 0.3);
+          box-shadow: 0 0 0 3px rgba(226, 19, 110, 0.15);
+          background: var(--bg-surface);
         }
 
         textarea {
@@ -806,7 +807,7 @@ export default function Home() {
           align-items: center;
           margin: 1.8rem 0 1rem 0;
           padding-top: 1rem;
-          border-top: 1px solid rgba(255, 255, 255, 0.05);
+          border-top: 1px solid var(--border-color);
         }
 
         .section-title {
@@ -816,9 +817,9 @@ export default function Home() {
         }
 
         .btn-small {
-          background: rgba(99, 102, 241, 0.1);
-          color: #a5b4fc;
-          border: 1px solid rgba(99, 102, 241, 0.3);
+          background: var(--bg-main);
+          color: var(--color-indigo);
+          border: 1px solid rgba(226, 19, 110, 0.3);
           padding: 0.4rem 0.8rem;
           border-radius: 8px;
           cursor: pointer;
@@ -843,7 +844,7 @@ export default function Home() {
         }
 
         .tx-item {
-          background: rgba(0, 0, 0, 0.15);
+          background: var(--bg-main);
           border: 1px solid var(--border-color);
           border-radius: 12px;
           padding: 1rem;
@@ -864,9 +865,9 @@ export default function Home() {
         }
 
         .btn-delete {
-          background: rgba(239, 68, 68, 0.1);
-          border: 1px solid rgba(239, 68, 68, 0.3);
-          color: #fca5a5;
+          background: rgba(220, 53, 69, 0.08);
+          border: 1px solid rgba(220, 53, 69, 0.2);
+          color: var(--color-rose);
           width: 32px;
           height: 32px;
           border-radius: 8px;
@@ -894,7 +895,7 @@ export default function Home() {
           cursor: pointer;
           width: 100%;
           margin-top: 1.8rem;
-          box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+          box-shadow: 0 4px 20px rgba(226, 19, 110, 0.2);
           transition: all 0.3s ease;
           display: flex;
           justify-content: center;
@@ -905,7 +906,7 @@ export default function Home() {
 
         .btn-investigate:hover:not(:disabled) {
           transform: translateY(-2px);
-          box-shadow: 0 6px 24px rgba(99, 102, 241, 0.4);
+          box-shadow: 0 6px 24px rgba(226, 19, 110, 0.3);
           filter: brightness(1.1);
         }
 
@@ -918,7 +919,7 @@ export default function Home() {
         .scenarios-section {
           margin-top: 2rem;
           padding-top: 1.5rem;
-          border-top: 1px solid rgba(255, 255, 255, 0.05);
+          border-top: 1px solid var(--border-color);
         }
 
         .scenarios-grid {
@@ -935,7 +936,7 @@ export default function Home() {
         }
 
         .scenario-card {
-          background: rgba(255, 255, 255, 0.02);
+          background: var(--bg-surface);
           border: 1px solid var(--border-color);
           border-radius: 12px;
           padding: 0.8rem 1rem;
@@ -945,15 +946,15 @@ export default function Home() {
         }
 
         .scenario-card:hover {
-          background: rgba(99, 102, 241, 0.05);
-          border-color: rgba(99, 102, 241, 0.3);
+          background: var(--bg-main);
+          border-color: rgba(226, 19, 110, 0.3);
           transform: translateY(-1px);
         }
 
         .scenario-card h4 {
           font-size: 0.9rem;
           font-weight: 600;
-          color: #a5b4fc;
+          color: var(--color-indigo);
           margin-bottom: 0.2rem;
         }
 
@@ -977,7 +978,7 @@ export default function Home() {
           padding: 6rem 2rem;
           text-align: center;
           color: var(--text-muted);
-          border: 2px dashed rgba(255, 255, 255, 0.05);
+          border: 2px dashed var(--border-color);
           border-radius: 20px;
         }
 
@@ -996,11 +997,11 @@ export default function Home() {
         }
 
         .simulation-banner {
-          background: rgba(245, 158, 11, 0.08);
-          border: 1px solid rgba(245, 158, 11, 0.2);
+          background: rgba(255, 193, 7, 0.12);
+          border: 1px solid rgba(255, 193, 7, 0.3);
           padding: 0.8rem 1.2rem;
           border-radius: 12px;
-          color: #fcd34d;
+          color: #b28500;
           font-size: 0.85rem;
           display: flex;
           align-items: center;
@@ -1015,23 +1016,25 @@ export default function Home() {
           display: flex;
           align-items: flex-start;
           gap: 1.2rem;
-          color: white;
-          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
         }
 
         .verdict-card.consistent {
-          background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(6, 182, 212, 0.15) 100%);
-          border: 1px solid rgba(16, 185, 129, 0.3);
+          background: linear-gradient(135deg, rgba(40, 167, 69, 0.08) 0%, rgba(40, 167, 69, 0.15) 100%);
+          border: 1px solid rgba(40, 167, 69, 0.3);
+          color: #1e7e34;
         }
 
         .verdict-card.inconsistent {
-          background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(245, 158, 11, 0.15) 100%);
-          border: 1px solid rgba(239, 68, 68, 0.3);
+          background: linear-gradient(135deg, rgba(220, 53, 69, 0.08) 0%, rgba(220, 53, 69, 0.15) 100%);
+          border: 1px solid rgba(220, 53, 69, 0.3);
+          color: #bd2130;
         }
 
         .verdict-card.insufficient_data {
-          background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
-          border: 1px solid rgba(99, 102, 241, 0.3);
+          background: linear-gradient(135deg, rgba(226, 19, 110, 0.05) 0%, rgba(226, 19, 110, 0.12) 100%);
+          border: 1px solid rgba(226, 19, 110, 0.3);
+          color: #c50f5e;
         }
 
         .verdict-icon {
@@ -1059,13 +1062,14 @@ export default function Home() {
         }
 
         .stat-box {
-          background: rgba(255, 255, 255, 0.02);
+          background: var(--bg-surface);
           border: 1px solid var(--border-color);
           padding: 1.2rem;
           border-radius: 16px;
           display: flex;
           flex-direction: column;
           gap: 0.3rem;
+          box-shadow: 0 2px 10px rgba(0,0,0,0.02);
         }
 
         .stat-box span.lbl {
@@ -1096,34 +1100,34 @@ export default function Home() {
         }
 
         .badge.critical {
-          background: rgba(239, 68, 68, 0.2);
-          color: #fca5a5;
-          border: 1px solid rgba(239, 68, 68, 0.4);
+          background: rgba(220, 53, 69, 0.1);
+          color: #DC3545;
+          border: 1px solid rgba(220, 53, 69, 0.3);
           animation: pulse-danger 2s infinite;
         }
 
         .badge.high {
-          background: rgba(245, 158, 11, 0.2);
-          color: #fcd34d;
-          border: 1px solid rgba(245, 158, 11, 0.4);
+          background: rgba(255, 193, 7, 0.15);
+          color: #b28500;
+          border: 1px solid rgba(255, 193, 7, 0.3);
         }
 
         .badge.medium {
-          background: rgba(99, 102, 241, 0.2);
-          color: #c7d2fe;
-          border: 1px solid rgba(99, 102, 241, 0.4);
+          background: rgba(226, 19, 110, 0.1);
+          color: #E2136E;
+          border: 1px solid rgba(226, 19, 110, 0.3);
         }
 
         .badge.low {
-          background: rgba(148, 163, 184, 0.15);
-          color: #e2e8f0;
-          border: 1px solid rgba(148, 163, 184, 0.3);
+          background: rgba(102, 102, 102, 0.1);
+          color: #666666;
+          border: 1px solid rgba(102, 102, 102, 0.2);
         }
 
         @keyframes pulse-danger {
-          0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
-          70% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
-          100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+          0% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.4); }
+          70% { box-shadow: 0 0 0 6px rgba(220, 53, 69, 0); }
+          100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); }
         }
 
         /* Progress gauge */
@@ -1136,11 +1140,11 @@ export default function Home() {
 
         .progress-bar {
           height: 8px;
-          background: rgba(255, 255, 255, 0.05);
+          background: var(--bg-main);
           border-radius: 9999px;
           flex: 1;
           overflow: hidden;
-          border: 1px solid rgba(255, 255, 255, 0.02);
+          border: 1px solid var(--border-color);
         }
 
         .progress-fill {
@@ -1151,10 +1155,11 @@ export default function Home() {
 
         /* Detail Blocks */
         .detail-block {
-          background: rgba(255, 255, 255, 0.02);
+          background: var(--bg-surface);
           border: 1px solid var(--border-color);
           border-radius: 16px;
           padding: 1.5rem;
+          box-shadow: 0 2px 10px rgba(0,0,0,0.02);
         }
 
         .detail-block h4 {
@@ -1164,7 +1169,7 @@ export default function Home() {
           font-weight: 600;
           text-transform: uppercase;
           letter-spacing: 0.5px;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+          border-bottom: 1px solid var(--border-color);
           padding-bottom: 0.4rem;
         }
 
@@ -1179,8 +1184,8 @@ export default function Home() {
         }
 
         .reply-text {
-          background: rgba(0, 0, 0, 0.25);
-          border: 1px solid rgba(255, 255, 255, 0.06);
+          background: var(--bg-main);
+          border: 1px solid rgba(226, 19, 110, 0.15);
           border-radius: 10px;
           padding: 1rem;
           color: var(--text-primary);
@@ -1225,24 +1230,24 @@ export default function Home() {
         }
 
         .alert-callout.alarm {
-          background: rgba(239, 68, 68, 0.08);
-          border: 1px solid rgba(239, 68, 68, 0.2);
-          color: #fca5a5;
+          background: rgba(220, 53, 69, 0.08);
+          border: 1px solid rgba(220, 53, 69, 0.2);
+          color: var(--color-rose);
         }
 
         .alert-callout.safe {
-          background: rgba(16, 185, 129, 0.08);
-          border: 1px solid rgba(16, 185, 129, 0.2);
-          color: #a7f3d0;
+          background: rgba(40, 167, 69, 0.08);
+          border: 1px solid rgba(40, 167, 69, 0.2);
+          color: var(--color-emerald);
         }
 
         .reason-tag {
-          background: rgba(255, 255, 255, 0.04);
-          border: 1px solid rgba(255, 255, 255, 0.06);
+          background: var(--bg-main);
+          border: 1px solid rgba(226, 19, 110, 0.15);
           padding: 0.3rem 0.6rem;
           border-radius: 6px;
           font-size: 0.8rem;
-          color: var(--text-secondary);
+          color: var(--color-indigo);
           display: inline-block;
           margin-right: 0.4rem;
           margin-top: 0.4rem;
@@ -1250,7 +1255,7 @@ export default function Home() {
 
         /* Collapsible JSON */
         .collapsible-json {
-          background: rgba(0, 0, 0, 0.2);
+          background: var(--bg-surface);
           border: 1px solid var(--border-color);
           border-radius: 12px;
           overflow: hidden;
@@ -1258,7 +1263,7 @@ export default function Home() {
 
         .collapsible-header {
           padding: 0.8rem 1.2rem;
-          background: rgba(255, 255, 255, 0.01);
+          background: var(--bg-main);
           cursor: pointer;
           display: flex;
           justify-content: space-between;
@@ -1275,19 +1280,19 @@ export default function Home() {
         .json-content {
           padding: 1.2rem;
           border-top: 1px solid var(--border-color);
-          background: #06070d;
+          background: #FFF9FB;
           overflow-x: auto;
         }
 
         .json-content pre {
           font-family: 'JetBrains Mono', monospace;
           font-size: 0.85rem;
-          color: #38bdf8;
+          color: var(--color-purple);
         }
 
         /* Skeleton Loading animation */
         .skeleton-pulse {
-          background: linear-gradient(-90deg, #1c1e36 0%, #252848 50%, #1c1e36 100%);
+          background: linear-gradient(-90deg, var(--bg-main) 0%, var(--color-cyan) 50%, var(--bg-main) 100%);
           background-size: 400% 400%;
           animation: pulse-shimmer 1.5s ease-in-out infinite;
           border-radius: 16px;
@@ -1569,7 +1574,7 @@ export default function Home() {
           <h2 className="card-title">
             <span>Investigation Results</span>
             {result && isSimulated && (
-              <span className="simulation-badge" style={{ fontSize: '0.75rem', color: 'var(--color-amber)', background: 'rgba(245, 158, 11, 0.1)', padding: '0.2rem 0.5rem', borderRadius: '4px', border: '1px solid rgba(245, 158, 11, 0.2)' }}>
+              <span className="simulation-badge" style={{ fontSize: '0.75rem', color: '#b28500', background: 'rgba(255, 193, 7, 0.15)', padding: '0.2rem 0.5rem', borderRadius: '4px', border: '1px solid rgba(255, 193, 7, 0.3)' }}>
                 Offline Simulation
               </span>
             )}
@@ -1646,7 +1651,7 @@ export default function Home() {
               <div className="classification-grid">
                 <div className="stat-box">
                   <span className="lbl">Case Classification</span>
-                  <span className="val" style={{ color: '#a5b4fc' }}>{formatEnum(result.case_type)}</span>
+                  <span className="val" style={{ color: 'var(--color-indigo)' }}>{formatEnum(result.case_type)}</span>
                 </div>
                 <div className="stat-box">
                   <span className="lbl">Audit Severity</span>
@@ -1656,7 +1661,7 @@ export default function Home() {
                 </div>
                 <div className="stat-box">
                   <span className="lbl">Routing Department</span>
-                  <span className="val" style={{ color: '#c084fc' }}>{formatEnum(result.department)}</span>
+                  <span className="val" style={{ color: 'var(--color-purple)' }}>{formatEnum(result.department)}</span>
                 </div>
                 <div className="stat-box">
                   <span className="lbl">Copilot Confidence</span>
@@ -1687,7 +1692,7 @@ export default function Home() {
 
               <div className="detail-block">
                 <h4>Recommended Next Action</h4>
-                <p style={{ fontWeight: '500', color: '#cbd5e1' }}>{result.recommended_next_action}</p>
+                <p style={{ fontWeight: '500', color: 'var(--text-primary)' }}>{result.recommended_next_action}</p>
               </div>
 
               <div className="detail-block reply-editor">
