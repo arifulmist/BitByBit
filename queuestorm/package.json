@@ -1,0 +1,8 @@
+{
+  "name": "queuestorm-root",
+  "version": "1.0.0",
+  "description": "QueueStorm Investigator Root Workspace",
+  "scripts": {
+    "dev": "node start-all.js"
+  }
+}
