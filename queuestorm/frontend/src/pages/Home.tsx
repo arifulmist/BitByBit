@@ -206,6 +206,59 @@ export default function Home() {
   const [serverOnline, setServerOnline] = useState<boolean | null>(null);
   const [isSimulated, setIsSimulated] = useState(false);
   const [copySuccess, setCopySuccess] = useState(false);
+  
+  // Resizable split panels state & hooks
+  const [leftWidth, setLeftWidth] = useState(52); // Initial split %
+  const [isResizing, setIsResizing] = useState(false);
+
+  const startResize = (e: React.MouseEvent | React.TouchEvent) => {
+    // Only prevent default on mouse down to let touch events scroll normally unless dragging starts
+    if (e.type === 'mousedown') {
+      e.preventDefault();
+    }
+    setIsResizing(true);
+  };
+
+  useEffect(() => {
+    if (!isResizing) return;
+
+    const updateWidth = (clientX: number) => {
+      const container = document.querySelector('main');
+      if (!container) return;
+      const rect = container.getBoundingClientRect();
+      const relativeX = clientX - rect.left;
+      let percentage = (relativeX / rect.width) * 100;
+      if (percentage < 30) percentage = 30;
+      if (percentage > 70) percentage = 70;
+      setLeftWidth(percentage);
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      updateWidth(e.clientX);
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        updateWidth(e.touches[0].clientX);
+      }
+    };
+
+    const stopResize = () => {
+      setIsResizing(false);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', stopResize);
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
+    window.addEventListener('touchend', stopResize);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', stopResize);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchend', stopResize);
+    };
+  }, [isResizing]);
 
   // Sync rawJsonStr when ticketState changes
   useEffect(() => {
@@ -612,6 +665,8 @@ export default function Home() {
           padding: 2.5rem 1.5rem;
           background: radial-gradient(circle at 10% 20%, rgba(226, 19, 110, 0.05) 0%, transparent 40%),
                       radial-gradient(circle at 90% 80%, rgba(197, 15, 94, 0.04) 0%, transparent 45%);
+          position: relative;
+          overflow-x: hidden;
         }
 
         header {
@@ -622,6 +677,8 @@ export default function Home() {
           align-items: center;
           border-bottom: 1px solid var(--border-color);
           padding-bottom: 1.5rem;
+          position: relative;
+          z-index: 1;
         }
 
         .logo-section h1 {
@@ -684,11 +741,17 @@ export default function Home() {
           grid-template-columns: 1.1fr 0.9fr;
           gap: 2rem;
           align-items: start;
+          position: relative;
+          z-index: 1;
         }
 
         @media (max-width: 1024px) {
           main {
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr !important;
+            gap: 2rem !important;
+          }
+          .resizer-col {
+            display: none !important;
           }
         }
 
@@ -698,6 +761,7 @@ export default function Home() {
           border-radius: 20px;
           padding: 2rem;
           box-shadow: 0 4px 20px rgba(226, 19, 110, 0.04);
+          min-width: 0;
         }
 
         .card-title {
@@ -1288,6 +1352,8 @@ export default function Home() {
           font-family: 'JetBrains Mono', monospace;
           font-size: 0.85rem;
           color: var(--color-purple);
+          white-space: pre-wrap;
+          word-break: break-all;
         }
 
         /* Skeleton Loading animation */
@@ -1304,7 +1370,232 @@ export default function Home() {
           0% { background-position: 100% 50%; }
           100% { background-position: 0% 50%; }
         }
+ 
+        /* Background Decorations Styling */
+        .bg-decorations {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+          z-index: 0;
+          pointer-events: none;
+          overflow: hidden;
+        }
+ 
+        .bg-shape {
+          position: absolute;
+          color: rgba(226, 19, 110, 0.12);
+          transform-origin: center;
+        }
+
+        /* Resizer styling */
+        .resizer-col {
+          width: 8px;
+          cursor: col-resize;
+          background: transparent;
+          transition: background 0.2s ease;
+          border-radius: 4px;
+          margin: 0;
+          position: relative;
+          align-self: stretch;
+          z-index: 10;
+        }
+ 
+        .resizer-col:hover, .resizer-col.active {
+          background: rgba(226, 19, 110, 0.15);
+        }
+ 
+        .resizer-col::after {
+          content: "";
+          position: absolute;
+          left: 3px;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 2px;
+          height: 40px;
+          background: var(--border-color);
+          border-radius: 1px;
+          transition: background 0.2s ease, height 0.2s ease;
+        }
+ 
+        .resizer-col:hover::after, .resizer-col.active::after {
+          background: var(--border-active);
+          height: 60px;
+        }
+ 
+        .coin-1 {
+          top: 15%;
+          left: 6%;
+        }
+ 
+        .coin-2 {
+          bottom: 22%;
+          left: 24%;
+        }
+ 
+        .card-shape {
+          top: 38%;
+          right: 4%;
+        }
+ 
+        .wallet-shape {
+          bottom: 12%;
+          right: 14%;
+        }
+ 
+        .transfer-shape {
+          top: 6%;
+          right: 32%;
+        }
+ 
+        .phone-shape {
+          bottom: 42%;
+          left: 2%;
+        }
+ 
+        /* Float Animations */
+        @keyframes floatSlow {
+          0% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-12px) rotate(2deg); }
+          100% { transform: translateY(0px) rotate(0deg); }
+        }
+ 
+        @keyframes floatMedium {
+          0% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-20px) rotate(-4deg); }
+          100% { transform: translateY(0px) rotate(0deg); }
+        }
+ 
+        @keyframes floatFast {
+          0% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-28px) rotate(6deg); }
+          100% { transform: translateY(0px) rotate(0deg); }
+        }
+ 
+        .float-slow {
+          animation: floatSlow 8s ease-in-out infinite;
+        }
+ 
+        .float-medium {
+          animation: floatMedium 6s ease-in-out infinite;
+        }
+ 
+        .float-fast {
+          animation: floatFast 4s ease-in-out infinite;
+        }
+ 
+        /* Particle circles */
+        .particle {
+          position: absolute;
+          border-radius: 50%;
+          background: rgba(226, 19, 110, 0.16);
+          animation: floatSlow 10s ease-in-out infinite alternate;
+        }
+ 
+        .dot-1 {
+          width: 8px;
+          height: 8px;
+          top: 25%;
+          left: 20%;
+          animation-duration: 12s;
+        }
+ 
+        .dot-2 {
+          width: 12px;
+          height: 12px;
+          top: 65%;
+          left: 12%;
+          animation-duration: 9s;
+        }
+ 
+        .dot-3 {
+          width: 6px;
+          height: 6px;
+          top: 15%;
+          right: 18%;
+          animation-duration: 14s;
+        }
+ 
+        .dot-4 {
+          width: 10px;
+          height: 10px;
+          bottom: 30%;
+          right: 30%;
+          animation-duration: 11s;
+        }
+ 
+        .dot-5 {
+          width: 7px;
+          height: 7px;
+          top: 50%;
+          left: 45%;
+          animation-duration: 15s;
+        }
+ 
+        .dot-6 {
+          width: 9px;
+          height: 9px;
+          bottom: 8%;
+          left: 55%;
+          animation-duration: 10s;
+        }
       `}</style>
+
+      {/* Background Decorative Patterns */}
+      <div className="bg-decorations">
+        {/* Floating Coin 1 */}
+        <div className="bg-shape float-slow coin-1">
+          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <circle cx="12" cy="12" r="10" />
+            <text x="50%" y="58%" dominantBaseline="middle" textAnchor="middle" fontSize="10" fontWeight="bold" fill="currentColor">৳</text>
+          </svg>
+        </div>
+        {/* Floating Coin 2 */}
+        <div className="bg-shape float-medium coin-2">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <circle cx="12" cy="12" r="10" />
+            <text x="50%" y="58%" dominantBaseline="middle" textAnchor="middle" fontSize="10" fill="currentColor">৳</text>
+          </svg>
+        </div>
+        {/* Floating Credit Card */}
+        <div className="bg-shape float-fast card-shape">
+          <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
+            <rect x="2" y="5" width="20" height="14" rx="2" />
+            <line x1="2" y1="10" x2="22" y2="10" />
+            <rect x="6" y="14" width="2" height="2" />
+            <rect x="10" y="14" width="4" height="2" />
+          </svg>
+        </div>
+        {/* Floating Wallet */}
+        <div className="bg-shape float-slow wallet-shape">
+          <svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
+            <path d="M20 6h-2V5a3 3 0 00-3-3H5a3 3 0 00-3 3v14a3 3 0 003 3h14a3 3 0 003-3v-1H2v-2h20V6zm-8 8.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3z" />
+          </svg>
+        </div>
+        {/* Transfer Arrows */}
+        <div className="bg-shape float-medium transfer-shape">
+          <svg width="90" height="90" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+            <path d="M17 3L21 7M21 7L17 11M21 7H3M7 21L3 17M3 17L7 13M3 17H21" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </div>
+        {/* Mobile Phone Transact */}
+        <div className="bg-shape float-fast phone-shape">
+          <svg width="75" height="75" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
+            <rect x="5" y="2" width="14" height="20" rx="3" />
+            <circle cx="12" cy="18" r="1" />
+            <line x1="9" y1="6" x2="15" y2="6" strokeLinecap="round" />
+          </svg>
+        </div>
+
+        {/* Abstract subtle particle dots */}
+        <div className="particle dot-1"></div>
+        <div className="particle dot-2"></div>
+        <div className="particle dot-3"></div>
+        <div className="particle dot-4"></div>
+        <div className="particle dot-5"></div>
+        <div className="particle dot-6"></div>
+      </div>
 
       <header>
         <div className="logo-section">
@@ -1323,7 +1614,7 @@ export default function Home() {
         </div>
       </header>
 
-      <main>
+      <main style={{ gridTemplateColumns: `${leftWidth}% 8px 1fr`, gap: '0' }}>
         {/* Left Column: Input Panel */}
         <section className="card">
           <h2 className="card-title">
@@ -1568,6 +1859,13 @@ export default function Home() {
             )}
           </button>
         </section>
+
+        {/* Resizer Column */}
+        <div 
+          className={`resizer-col ${isResizing ? 'active' : ''}`} 
+          onMouseDown={startResize}
+          onTouchStart={startResize}
+        ></div>
 
         {/* Right Column: Analysis Output Panel */}
         <section className="card" style={{ minHeight: '600px' }}>
