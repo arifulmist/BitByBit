@@ -78,47 +78,6 @@ Once the servers are running:
 2. The backend API will be running at `http://localhost:3000`.
 3. You can interact with the user interface to perform support ops investigations. The frontend will communicate with the backend API, which in turn will utilize the configured AI models (Gemini, OpenAI, or Anthropic) based on your provided API keys to process the requests.
 
-## Deployment (Render)
-
-You can easily host both the frontend and backend on [Render](https://render.com) for free.
-
-### 1. Deploy the Backend (Web Service)
-1. Go to the Render Dashboard and create a new **Web Service**.
-2. Connect your GitHub repository.
-3. Configure the service:
-   - **Root Directory:** `queuestorm/backend`
-   - **Environment:** `Node`
-   - **Build Command:** `npm install`
-   - **Start Command:** `npm start`
-4. Under **Environment Variables**, add your keys:
-   - `GEMINI_API_KEY`, `OPENAI_API_KEY`, etc.
-5. Click **Create Web Service**. Once deployed, copy your backend URL (e.g., `https://your-backend.onrender.com`).
-
-### 2. Deploy the Frontend (Static Site)
-1. Create a new **Static Site** on Render.
-2. Connect your GitHub repository.
-3. Configure the site:
-   - **Root Directory:** `queuestorm/frontend`
-   - **Build Command:** `npm install && npm run build`
-   - **Publish Directory:** `dist`
-4. **Configure Rewrites (Crucial for API & Routing):**
-   Go to the "Redirects/Rewrites" tab for your Static Site and add the following rules:
-   
-   *Rule 1 (API Proxy):*
-   - **Source:** `/analyze-ticket*`
-   - **Destination:** `<YOUR_BACKEND_URL>/analyze-ticket*` (e.g., `https://your-backend.onrender.com/analyze-ticket*`)
-   - **Action:** `Rewrite`
-   
-   *Rule 2 (Health Check):*
-   - **Source:** `/health*`
-   - **Destination:** `<YOUR_BACKEND_URL>/health*`
-   - **Action:** `Rewrite`
-
-   *Rule 3 (React Routing):*
-   - **Source:** `/*`
-   - **Destination:** `/index.html`
-   - **Action:** `Rewrite`
-5. Click **Create Static Site** to deploy. Your app is now live!
 
 ## Tech Stack
 - **Frontend:** React 18, Vite
